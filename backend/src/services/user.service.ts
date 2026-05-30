@@ -3,6 +3,7 @@ import { hashPassword } from '../utils/bcrypt'
 
 export class UserService {
 
+    // Statik Test Personel Ekleme
     async createUserStatic() {
 
         const hashedPassword = await hashPassword("123456")
@@ -57,4 +58,25 @@ export class UserService {
 
         return result.rows[0]
     }
+    // Kullanıcı Ekleme
+
+    // Kullanıcı Listeleme
+
+    // Kullanıcı Detay
+
+    // Kullanıcı Silme
+
+    // Kullanıcı Güncelleme
+
+    // Kullanıcı Durum Güncelleme
+
+    // Kullanıcı Rol Atama
+
+    // Kullanıcı Departman Atama
+
+    // Kullanıcı Şifre Güncelleme
+
+    // Kullanıcı Arama/Filtreleme
+
+    
 }

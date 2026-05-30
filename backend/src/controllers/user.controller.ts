@@ -5,6 +5,7 @@ const userService = new UserService();
 
 export class UserController {
 
+    // Statik Test Personel Ekleme
     async staticCreateUser(req: Request, res: Response) {
         try {
             const response = await userService.createUserStatic();
