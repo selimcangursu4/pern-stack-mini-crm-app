@@ -17,4 +17,7 @@ router.get("/fetch",async (req,res)=>{
 router.get("/detail/:id",async (req,res)=>{
     await userController.detailUser(req,res);
 })
+router.post("/remove/:id",async (req,res)=>{
+    await userController.removeUser(req,res);
+})
 export default router

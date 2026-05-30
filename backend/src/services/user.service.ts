@@ -122,9 +122,15 @@ export class UserService {
         const user = await pool.query("SELECT * FROM users WHERE id=$1",[id])
         return user.rows[0];
     }
-
     // Kullanıcı Silme
-
+    async removeUser(id:String)
+    {
+        const user = await pool.query(
+            "DELETE FROM users WHERE id = $1 RETURNING *",
+            [id]
+        )
+        return user.rows[0]
+    }
     // Kullanıcı Güncelleme
 
     // Kullanıcı Durum Güncelleme

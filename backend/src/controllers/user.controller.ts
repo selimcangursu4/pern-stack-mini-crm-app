@@ -77,4 +77,24 @@ export class UserController {
             })
         }
     }
+    // Kullanıcıyı Sil
+    async removeUser(req:Request,res:Response)
+    {
+        try {
+            const id = req.params.id as string
+            const response = await userService.removeUser(id)
+    
+            return res.status(200).json({
+                success:true,
+                message:"Kullanıcı Silme İşlemi Başarılı",
+    
+            }) 
+        } catch (error:any) {
+            return res.status(200).json({
+                success:true,
+                message:"Kullanıcı Silme İşlemi Başarısız",
+                error:error.message    
+            })  
+        }
+    }
 }
