@@ -11,4 +11,7 @@ router.get("/static-create",async (req,res)=>{
 router.post("/create",async (req,res)=>{
     await userController.createUser(req,res);
 })
+router.get("/fetch",async (req,res)=>{
+    await userController.fetchUser(req,res);
+})
 export default router

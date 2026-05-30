@@ -40,4 +40,22 @@ export class UserController {
             })
         }
     }
+    // Tüm Kullanıcıları Listele
+    async fetchUser(req:Request,res:Response)
+    {
+        try {
+          const response = await userService.listUsers()
+          return res.status(201).json({
+            success:true,
+            message:"Kullancıların Tümü Listelendi",
+            data:response
+          })
+        } catch (error:any) {
+            return res.status(401).json({
+                success: false,
+                message: "Kullanıcı Ekleme Başarısız",
+                err: error.message
+            })  
+        }
+    }
 }

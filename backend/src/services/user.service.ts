@@ -3,7 +3,6 @@ import { hashPassword } from '../utils/bcrypt'
 import {RegisterDTO} from "../types/user.types"
 
 export class UserService {
-
     // Statik Test Personel Ekleme
     async createUserStatic() {
 
@@ -111,8 +110,12 @@ export class UserService {
         ])
         return user.rows[0]
     }
-
     // Kullanıcı Listeleme
+    async listUsers()
+    {
+        const users = await pool.query("SELECT * FROM users")
+        return users.rows
+    }
 
     // Kullanıcı Detay
 
