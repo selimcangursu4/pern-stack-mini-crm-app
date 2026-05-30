@@ -97,4 +97,26 @@ export class UserController {
             })  
         }
     }
+    // Kullanıcıyı Güncelle
+    async updateUser(req:Request,res:Response)
+    {
+        try {
+            const id = req.params.id as string
+            const formData = req.body
+            const response = await userService.update(id,formData)
+    
+            return res.status(200).json({
+                success:true,
+                message:"Kullanıcı Güncelleme İşlemi Başarılı",
+                data:response
+    
+            }) 
+        } catch (error:any) {
+            return res.status(200).json({
+                success:true,
+                message:"Kullanıcı Güncelleme İşlemi Başarısız",
+                error:error.message    
+            }) 
+        }
+    }
 }

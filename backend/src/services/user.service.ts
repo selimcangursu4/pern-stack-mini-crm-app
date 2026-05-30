@@ -1,6 +1,6 @@
 import { pool } from '../config/db'
 import { hashPassword } from '../utils/bcrypt'
-import {RegisterDTO} from "../types/user.types"
+import {RegisterDTO,UpdateUserDTO} from "../types/user.types"
 
 export class UserService {
     // Statik Test Personel Ekleme
@@ -132,6 +132,49 @@ export class UserService {
         return user.rows[0]
     }
     // Kullanıcı Güncelleme
+    async update(id:String,updateFormData : UpdateUserDTO )
+    {
+        const user = await pool.query(
+            `UPDATE users 
+             SET 
+                fullname = $1,
+                business_email = $2,
+                birthday = $3,
+                tc_no = $4,
+                individual_email = $5,
+                birthplace = $6,
+                gender_id = $7,
+                marital_status_id = $8,
+                phone = $9,
+                business_phone = $10,
+                address = $11,
+                city_id = $12,
+                district_id = $13,
+                starting_work = $14,
+                date_of_leaving = $15
+             WHERE id = $16
+             RETURNING *`,
+            [
+                updateFormData.fullname,
+                updateFormData.business_email,
+                updateFormData.birthday,
+                updateFormData.tc_no,
+                updateFormData.individual_email,
+                updateFormData.birthplace,
+                updateFormData.gender_id,
+                updateFormData.marital_status_id,
+                updateFormData.phone,
+                updateFormData.business_phone,
+                updateFormData.address,
+                updateFormData.city_id,
+                updateFormData.district_id,
+                updateFormData.starting_work,
+                updateFormData.date_of_leaving,
+                id
+            ]
+        )
+        return user.rows[0];
+    }
 
     // Kullanıcı Durum Güncelleme
 
