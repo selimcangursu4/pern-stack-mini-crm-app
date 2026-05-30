@@ -14,4 +14,7 @@ router.post("/create",async (req,res)=>{
 router.get("/fetch",async (req,res)=>{
     await userController.fetchUser(req,res);
 })
+router.get("/detail/:id",async (req,res)=>{
+    await userController.detailUser(req,res);
+})
 export default router

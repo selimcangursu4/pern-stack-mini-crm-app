@@ -58,4 +58,23 @@ export class UserController {
             })  
         }
     }
+    // Kullanıcı Detayını Getir
+    async detailUser(req:Request,res:Response)
+    {
+        try {
+            const userId = req.params.id as string;
+            const response = await userService.userDetail(userId)
+            return res.status(200).json({
+                success:true,
+                message:"İlgili Kullanıcı Bilgileri Getirildi",
+                data:response
+            })
+        } catch (error:any) {
+            return res.status(401).json({
+                success:false,
+                message:"İlgili Kullanıcı Bilgileri Getirilemedi Hata!",
+                error:error.message
+            })
+        }
+    }
 }
