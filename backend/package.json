@@ -6,7 +6,8 @@
     "start": "ts-node-dev src/index.ts",
     "build": "tsc",
     "start:prod": "node dist/index.js",
-    "dev": "ts-node-dev src/index.ts"
+    "dev": "ts-node-dev src/index.ts",
+     "migrate": "ts-node src/db/migrate.ts"
   },
   "keywords": [],
   "author": "",
