@@ -22,4 +22,22 @@ export class UserController {
 
         }
     }
+    // Kullanıcı Ekleme
+    async createUser(req:Request,res:Response)
+    {
+        try {
+            const formData = req.body
+            const response = await userService.create(formData);
+            return res.status(201).json({
+                success: true,
+                message: "Kullanıcı Ekleme Başarılı"
+            })
+        } catch (error:any) {
+            return res.status(401).json({
+                success: false,
+                message: "Kullanıcı Ekleme Başarısız",
+                err: error.message
+            })
+        }
+    }
 }
