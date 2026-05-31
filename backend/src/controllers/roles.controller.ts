@@ -84,31 +84,58 @@ export class RoleController {
             });
         }
     }
-    async update(req: Request, res: Response)
-    {
+    async update(req: Request, res: Response) {
         try {
             const roleId = req.params.id as string;
             const formData = req.body;
-    
+
             const response = await roleService.update(roleId, formData);
-    
+
             if (!response) {
                 return res.status(404).json({
                     success: false,
                     message: "Rol Güncellenemedi Rol Bulunamadı",
                 });
             }
-    
+
             return res.status(200).json({
                 success: true,
                 message: "Rol Güncelleme Başarılı",
                 data: response
             });
-    
+
         } catch (error: any) {
             return res.status(500).json({
                 success: false,
                 message: "Rol Güncellenemedi",
+                error: error.message
+            });
+        }
+    }
+    async updateStatus(req: Request, res: Response) {
+        try {
+            const roleId = req.params.id as string;
+            const statusId = Number(req.body.statusId);
+
+            const response = await roleService.roleStatusUpdate(roleId, statusId);
+
+            if (!response) {
+                return res.status(404).json({
+                    success: false,
+                    message: "Rol Bulunamadı Güncellenemedi",
+                });
+            }
+
+            return res.status(200).json({
+                success: true,
+                message: "Rol Durumu Güncellendi",
+                data: response
+            });
+
+        } catch (error: any) {
+            return res.status(500).json({
+                success: false,
+                message: "Rol Durumu Güncellenemedi",
                 error: error.message
             });
         }

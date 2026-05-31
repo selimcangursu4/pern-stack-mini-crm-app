@@ -19,4 +19,7 @@ router.post('/remove/:id',(req,res)=>{
 router.post('/update/:id',(req,res)=>{
     return roleController.update(req,res);
 })
+router.post('/status-update/:id',(req,res)=>{
+    return roleController.updateStatus(req,res);
+})
 export default router
