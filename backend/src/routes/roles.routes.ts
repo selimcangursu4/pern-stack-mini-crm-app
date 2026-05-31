@@ -7,5 +7,7 @@ const roleController = new RoleController();
 router.post('/create',(req,res)=>{
     return roleController.create(req,res);
 })
-
+router.get('/fetch',(req,res)=>{
+    return roleController.fetch(req,res);
+})
 export default router

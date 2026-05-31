@@ -23,4 +23,23 @@ export class RoleController{
            })        
         }
     }
+    async fetch(req:Request,res:Response)
+    {
+
+       try {
+        const response = await roleService.fetch();
+
+        return res.status(201).json({
+            success:true,
+            message:"Tüm Kullanıcı Rolleri Getirildi!",
+            data:response
+        })
+       } catch (error:any) {
+        return res.status(401).json({
+            success:true,
+            message:" Kullanıcı Rolleri Listelenmedi Hata!",
+            data:error.message
+        })
+       }
+    }
 }
