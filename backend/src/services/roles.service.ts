@@ -1,5 +1,5 @@
 import { pool } from '../config/db'
-import { CreateRoleDTO } from '../types/roles.types'
+import { CreateRoleDTO,UpdateRoleDTO } from '../types/roles.types'
 
 export class RoleService {
     // Rol Ekle
@@ -26,8 +26,21 @@ export class RoleService {
 
         return role.rows[0];
     }
-
-    // Rol Güncelle
+    // Rol Güncelleme
+    async update(id: string, formData: UpdateRoleDTO)
+    {
+        const role = await pool.query(
+            `UPDATE roles 
+             SET role_name = $1,
+                 description = $2,
+                 status_id = $3
+             WHERE id = $4
+             RETURNING *`,
+            [formData.role_name, formData.description, formData.status_id, id]
+        );
+    
+        return role.rows[0];
+    }
 
     // Rol Durumunu Güncelle
 

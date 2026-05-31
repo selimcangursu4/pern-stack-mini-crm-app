@@ -84,4 +84,33 @@ export class RoleController {
             });
         }
     }
+    async update(req: Request, res: Response)
+    {
+        try {
+            const roleId = req.params.id as string;
+            const formData = req.body;
+    
+            const response = await roleService.update(roleId, formData);
+    
+            if (!response) {
+                return res.status(404).json({
+                    success: false,
+                    message: "Rol Güncellenemedi Rol Bulunamadı",
+                });
+            }
+    
+            return res.status(200).json({
+                success: true,
+                message: "Rol Güncelleme Başarılı",
+                data: response
+            });
+    
+        } catch (error: any) {
+            return res.status(500).json({
+                success: false,
+                message: "Rol Güncellenemedi",
+                error: error.message
+            });
+        }
+    }
 }
