@@ -4,6 +4,8 @@ import cors from "cors";
 import pool from "./config/db";
 import AuthRoutes from './routes/auth.routes'
 import UserRoutes from "./routes/user.routes"
+import RoleRoutes from "./routes/roles.routes"
+
 dotenv.config();
 const app = express();
 
@@ -11,6 +13,7 @@ app.use(express.json());
 app.use(cors());
 app.use('/api/auth',AuthRoutes);
 app.use("/api/user",UserRoutes);
+app.use("/api/roles",RoleRoutes);
 
 const PORT = process.env.PORT || 3000;
 
