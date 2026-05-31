@@ -2,7 +2,7 @@ export interface RegisterDTO {
     id: string
     fullname: string
     business_email: string
-    password?: string
+    password: string
     department_id?: number
     role_id?: number
     birthday?: Date

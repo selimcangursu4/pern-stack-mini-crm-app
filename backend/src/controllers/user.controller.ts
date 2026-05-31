@@ -161,5 +161,45 @@ export class UserController {
         }
     }
     // Departman Atama / Güncelleme
-    
+    async updateUserDepartment(req:Request,res:Response)
+    {
+        try {
+            const id = req.params.id as string
+            const {department_id} = req.body
+            const role = await userService.userRoleUpdate(id,department_id)
+            return res.status(201).json({
+                success:true,
+                message:"Kullanıcı Departmanı Değiştirildi!",
+                data:role
+
+            }) 
+        } catch (error:any) {
+            return res.status(401).json({
+                success:true,
+                message:"Kullanıcı Departmanı Değiştirilemedi!",
+                error:error.message
+            }) 
+        }
+    }
+    // Parola Değiştirme
+    async updatePassword(req:Request,res:Response)
+    {
+        try {
+            const id = req.params.id as string
+            const {password} = req.body
+            const role = await userService.changePassword(id,password)
+            return res.status(201).json({
+                success:true,
+                message:"Kullanıcı Şifresi Değiştirildi!",
+                data:role
+
+            }) 
+        } catch (error:any) {
+            return res.status(401).json({
+                success:true,
+                message:"Kullanıcı Şifresi Değiştirilemedi!",
+                error:error.message
+            })   
+        }
+    }
 }

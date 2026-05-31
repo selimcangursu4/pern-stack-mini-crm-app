@@ -62,7 +62,7 @@ export class UserService {
     async create(newUserData : RegisterDTO )
     {
 
-        const hashedPassword = await hashPassword("123456")
+        const hashedPassword = await hashPassword(newUserData.password)
 
         const user = await pool.query(`INSERT INTO users (
                 fullname,
@@ -187,10 +187,20 @@ export class UserService {
         const role = await pool.query("UPDATE users SET role_id = $1 WHERE id=$2 RETURNING *",[roleId,id])
         return role.rows[0];
     }
-
     // Kullanıcı Departman Atama
-
+    async userDepartmentUpdate(id:String,department_id:String)
+    {
+        const role = await pool.query("UPDATE users SET department_id = $1 WHERE id=$2 RETURNING *",[department_id,id])
+        return role.rows[0];
+    }
     // Kullanıcı Şifre Güncelleme
+    async changePassword(id:string,password:string)
+    {
+        const hashedPassword = await hashPassword(password);
+
+        const role = await pool.query("UPDATE users SET password = $1 WHERE id=$2 RETURNING *",[hashedPassword,id])
+        return role.rows[0];
+    }
 
     // Kullanıcı Arama/Filtreleme
 

@@ -29,4 +29,7 @@ router.post("/update-status/:id",async (req,res)=>{
 router.post("/update-role/:id",async (req,res)=>{
     await userController.updateUserRole(req,res);
 })
+router.post("/update-password/:id",async (req,res)=>{
+    await userController.updatePassword(req,res);
+})
 export default router
