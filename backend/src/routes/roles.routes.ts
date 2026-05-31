@@ -13,4 +13,7 @@ router.get('/fetch',(req,res)=>{
 router.get('/detail/:id',(req,res)=>{
     return roleController.detail(req,res);
 })
+router.post('/remove/:id',(req,res)=>{
+    return roleController.detail(req,res);
+})
 export default router
