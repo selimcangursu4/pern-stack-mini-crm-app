@@ -139,4 +139,27 @@ export class UserController {
             })
         }
     }
+    // Kullanıcı Rolünü Güncelle
+    async updateUserRole(req:Request,res:Response)
+    {
+        try {
+            const roleId = req.params.id as string
+            const {role_id} = req.body
+            const role = await userService.userRoleUpdate(roleId,role_id)
+            return res.status(201).json({
+                success:true,
+                message:"Kullanıcı Rolü Değiştirildi!",
+                data:role
+
+            }) 
+        } catch (error:any) {
+            return res.status(401).json({
+                success:true,
+                message:"Kullanıcı Rolü Değiştirilemedi!",
+                error:error.message
+            }) 
+        }
+    }
+    // Departman Atama / Güncelleme
+    
 }
