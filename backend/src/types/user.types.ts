@@ -39,3 +39,16 @@ export interface UpdateUserDTO{
     starting_work?: Date
     date_of_leaving?: Date
 }
+
+export interface SearchUserDTO{
+    id:string,
+    fullname:string,
+    department_id:string,
+    role_id:string,
+    gender_id:number,
+    phone:string,
+    business_phone:string,
+    starting_work:Date,
+    date_of_leaving:Date,
+    employee_status_id:string
+}

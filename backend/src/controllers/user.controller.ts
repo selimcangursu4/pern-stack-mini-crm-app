@@ -202,4 +202,35 @@ export class UserController {
             })   
         }
     }
+    // Kullanıcı Arama 
+    async searchUser(req:Request,res:Response)
+    {
+        try {
+            const searchData = req.body
+            const data = await userService.search(searchData)
+
+            if(!data || data.length === 0)   
+            {
+                return res.status(404).json({
+                    success:true,
+                    message:"İlgili Kullanıcı Bulunamadı!",
+                    data:data
+    
+                })   
+            }
+           
+            return res.status(201).json({
+                success:true,
+                message:"Arama Sonucu Başarılı !",
+                data:data
+
+            })  
+        } catch (error:any) {
+            return res.status(401).json({
+                success:true,
+                message:"Arama Sonucu Başarısız!",
+                error:error.message
+            })   
+        }
+    }
 }

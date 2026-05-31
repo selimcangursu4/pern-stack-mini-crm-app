@@ -32,4 +32,7 @@ router.post("/update-role/:id",async (req,res)=>{
 router.post("/update-password/:id",async (req,res)=>{
     await userController.updatePassword(req,res);
 })
+router.post("/search",async (req,res)=>{
+    await userController.searchUser(req,res);
+})
 export default router

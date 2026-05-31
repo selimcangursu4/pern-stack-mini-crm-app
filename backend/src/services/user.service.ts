@@ -1,6 +1,6 @@
 import { pool } from '../config/db'
 import { hashPassword } from '../utils/bcrypt'
-import {RegisterDTO,UpdateUserDTO} from "../types/user.types"
+import {RegisterDTO,UpdateUserDTO,SearchUserDTO} from "../types/user.types"
 
 export class UserService {
     // Statik Test Personel Ekleme
@@ -201,8 +201,67 @@ export class UserService {
         const role = await pool.query("UPDATE users SET password = $1 WHERE id=$2 RETURNING *",[hashedPassword,id])
         return role.rows[0];
     }
-
     // Kullanıcı Arama/Filtreleme
+    async search(searchData: SearchUserDTO) {
+
+        let query = "SELECT * FROM users WHERE 1=1";
+        const values: any[] = [];
+        let index = 1;
+    
+        if (searchData.id) {
+            query += ` AND id = $${index++}`;
+            values.push(searchData.id);
+        }
+    
+        if (searchData.fullname) {
+            query += ` AND fullname ILIKE $${index++}`;
+            values.push(`%${searchData.fullname}%`);
+        }
+    
+        if (searchData.department_id) {
+            query += ` AND department_id = $${index++}`;
+            values.push(searchData.department_id);
+        }
+    
+        if (searchData.role_id) {
+            query += ` AND role_id = $${index++}`;
+            values.push(searchData.role_id);
+        }
+    
+        if (searchData.gender_id) {
+            query += ` AND gender_id = $${index++}`;
+            values.push(searchData.gender_id);
+        }
+    
+        if (searchData.phone) {
+            query += ` AND phone ILIKE $${index++}`;
+            values.push(`%${searchData.phone}%`);
+        }
+    
+        if (searchData.business_phone) {
+            query += ` AND business_phone ILIKE $${index++}`;
+            values.push(`%${searchData.business_phone}%`);
+        }
+    
+        if (searchData.employee_status_id) {
+            query += ` AND employee_status_id = $${index++}`;
+            values.push(searchData.employee_status_id);
+        }
+    
+        if (searchData.starting_work) {
+            query += ` AND starting_work = $${index++}`;
+            values.push(searchData.starting_work);
+        }
+    
+        if (searchData.date_of_leaving) {
+            query += ` AND date_of_leaving = $${index++}`;
+            values.push(searchData.date_of_leaving);
+        }
+    
+        const result = await pool.query(query, values);
+    
+        return result.rows;
+    }
 
 
 }
