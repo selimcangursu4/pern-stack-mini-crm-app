@@ -5,6 +5,7 @@ import pool from "./config/db";
 import AuthRoutes from './routes/auth.routes'
 import UserRoutes from "./routes/user.routes"
 import RoleRoutes from "./routes/roles.routes"
+import DepartmentRoutes from "./routes/departments.routes"
 
 dotenv.config();
 const app = express();
@@ -14,6 +15,7 @@ app.use(cors());
 app.use('/api/auth',AuthRoutes);
 app.use("/api/user",UserRoutes);
 app.use("/api/roles",RoleRoutes);
+app.use("/api/department",DepartmentRoutes);
 
 const PORT = process.env.PORT || 3000;
 

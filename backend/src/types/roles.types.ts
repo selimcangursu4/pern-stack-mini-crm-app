@@ -3,3 +3,8 @@ export interface CreateRoleDTO {
     description: string,
     status_id: number,
 }
+export interface UpdateRoleDTO {
+    role_name: string,
+    description: string,
+    status_id: number,
+}
