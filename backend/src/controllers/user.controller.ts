@@ -119,4 +119,24 @@ export class UserController {
             }) 
         }
     }
+    // Kullanıcı Durumu Güncelleme
+    async updateStatusId(req:Request,res:Response)
+    {
+        try {
+            const userId = req.params.id as String
+            const { employee_status_id } = req.body;
+            const response = await userService.statusUpdate(userId,employee_status_id);
+
+            return res.status(201).json({
+                success:true,
+                message:"Kullanıcı Durumu Değiştirildi!"
+            })
+        } catch (error:any) {
+            return res.status(201).json({
+                success:true,
+                message:"Kullanıcı Durumu Değiştirilemedi!",
+                error:error.message
+            })
+        }
+    }
 }

@@ -23,4 +23,7 @@ router.post("/remove/:id",async (req,res)=>{
 router.post("/update/:id",async (req,res)=>{
     await userController.updateUser(req,res);
 })
+router.post("/update-status/:id",async (req,res)=>{
+    await userController.updateStatusId(req,res);
+})
 export default router

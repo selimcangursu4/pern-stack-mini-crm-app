@@ -175,8 +175,12 @@ export class UserService {
         )
         return user.rows[0];
     }
-
     // Kullanıcı Durum Güncelleme
+    async statusUpdate(id:String,statusId : string)
+    {
+        const status = await pool.query("UPDATE users SET employee_status_id=$1 WHERE  id=$2 RETURNING * ",[statusId,id]);
+        return status.rows[0];
+    }
 
     // Kullanıcı Rol Atama
 
