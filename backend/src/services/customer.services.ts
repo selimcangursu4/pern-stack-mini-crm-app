@@ -30,7 +30,6 @@ export class CustomerService {
 
         return result.rows[0];
     }
-
     //  Müşterileri Listele (filter + search + pagination)
     async getCustomers(filter: CustomerFilterDTO) {
         let query = `SELECT * FROM customers WHERE 1=1`;
@@ -83,7 +82,6 @@ export class CustomerService {
         const result = await pool.query(query, values);
         return result.rows;
     }
-
     //  Müşteri Detay
     async getCustomerById(id: number) {
         const result = await pool.query(
@@ -93,7 +91,6 @@ export class CustomerService {
 
         return result.rows[0];
     }
-
     //  Müşteri Güncelle
     async updateCustomer(id: number, data: UpdateCustomerDTO) {
         const fields: string[] = [];
@@ -120,7 +117,6 @@ export class CustomerService {
         const result = await pool.query(query, values);
         return result.rows[0];
     }
-
     // Müşteri Sil (soft delete önerilir)
     async deleteCustomer(id: number) {
         const result = await pool.query(
@@ -130,7 +126,6 @@ export class CustomerService {
 
         return result.rows[0];
     }
-
     // Müşteri Ara
     async searchCustomer(search: string) {
         const result = await pool.query(
@@ -143,7 +138,6 @@ export class CustomerService {
 
         return result.rows;
     }
-
     // Agent değiştir
     async changeAgent(customerId: number, agentId: number) {
         const result = await pool.query(
@@ -156,4 +150,21 @@ export class CustomerService {
 
         return result.rows[0];
     }
+    // Müşteri Notu Ekle
+    async createNote(
+        customerId: number,
+        description: string,
+        userId: number
+    ) {
+        const result = await pool.query(
+            `INSERT INTO customer_notes
+        (customer_id, description, user_id)
+        VALUES ($1, $2, $3)
+        RETURNING *`,
+            [customerId, description, userId]
+        );
+
+        return result.rows[0];
+    }
+
 }

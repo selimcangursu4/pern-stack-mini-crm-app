@@ -151,4 +151,39 @@ export class CustomerController {
             });
         }
     }
+
+    // Müşteri Notu Ekle
+    async createNote(req: Request, res: Response) {
+        try {
+            const customerId = Number(req.params.id);
+            const { description } = req.body;
+    
+            const userId = req.user?.user_id;
+    
+            if (!userId) {
+                return res.status(401).json({
+                    success: false,
+                    message: "Unauthorized"
+                });
+            }
+    
+            const response = await customerService.createNote(
+                customerId,
+                description,
+                userId
+            );
+    
+            return res.status(201).json({
+                success: true,
+                message: "Müşteri notu başarıyla eklendi",
+                data: response
+            });
+    
+        } catch (error: any) {
+            return res.status(500).json({
+                success: false,
+                message: error.message
+            });
+        }
+    }
 }

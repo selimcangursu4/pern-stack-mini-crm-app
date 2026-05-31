@@ -12,8 +12,12 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
 
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "ignoreDeprecations": "6.0"
   },
   "include": ["src"],
+  "ts-node": {
+    "files": true
+  },
   "exclude": ["node_modules"]
 }
