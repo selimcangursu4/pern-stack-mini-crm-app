@@ -42,4 +42,22 @@ export class RoleController{
         })
        }
     }
+    async detail(req:Request,res:Response)
+    {
+        try {
+            const roleId = req.params.id as string
+            const response = await roleService.detail(roleId);
+            return res.status(201).json({
+                success:true,
+                message:" Kullanıcı Detay Listelendi!",
+                data:response
+            })
+        } catch (error:any) {
+            return res.status(401).json({
+                success:false,
+                message:" Kullanıcı Detay Listelenmedi Hata!",
+                error:error.message
+            })
+        }
+    }
 }

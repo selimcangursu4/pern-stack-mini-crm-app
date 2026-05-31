@@ -10,4 +10,7 @@ router.post('/create',(req,res)=>{
 router.get('/fetch',(req,res)=>{
     return roleController.fetch(req,res);
 })
+router.get('/detail/:id',(req,res)=>{
+    return roleController.detail(req,res);
+})
 export default router

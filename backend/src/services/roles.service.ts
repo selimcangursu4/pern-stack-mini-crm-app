@@ -15,8 +15,13 @@ export class RoleService{
         return roles.rows
     }
     // Rol Detay
-
+    async detail(id:String)
+    {
+        const role = await pool.query("SELECT * FROM roles WHERE id=$1",[id])
+        return role.rows[0];
+    }
     // Rol Sil
+    
 
     // Rol Güncelle
 
